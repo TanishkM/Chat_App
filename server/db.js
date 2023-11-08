@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-const mongoURI = "mongodb://localhost:27017/chatDB"
+require('dotenv').config();
+const mongoURI = process.env.REACT_APP_MONGO_URL;
 
 const connectToMongo = ()=>{
     mongoose.connect(mongoURI, ()=>{

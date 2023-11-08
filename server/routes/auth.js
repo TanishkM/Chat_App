@@ -1,11 +1,13 @@
 const express = require('express');
 const User = require('../models/User');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+require('dotenv').config();
 const { body, validationResult } = require('express-validator');
 var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser');
 
-const JWT_SECRET = 'Tanishq$$';
+const JWT_SECRET = process.env.REACT_APP_SECRET;
 
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
 router.post('/createuser', [
@@ -38,8 +40,6 @@ router.post('/createuser', [
       }
     }
     const authtoken = jwt.sign(data, JWT_SECRET);
-
-
     // res.json(user)
     success=true;
     res.json({success, authtoken })
@@ -65,12 +65,13 @@ router.post('/login', [
   
     const { email, password } = req.body;
     try {
+      // let newPass=bcrypt.hash(password, 12);
       let user = await User.findOne({ email });
       if (!user) {
         success = false
         return res.status(400).json({ error: "Please try to login with correct credentials" });
       }
-      if (!(password==user.password)) {
+      if (!(await bcrypt.compare(password, user.password))) {
         success = false
         return res.status(400).json({ success, error: "Please try to login with correct credentials" });
       }
