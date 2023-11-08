@@ -17,7 +17,7 @@ const Login = (props) => {
         e.preventDefault();
         let response;
         if(!spage)
-        { response = await fetch(`http://${process.env.REACT_APP_API_URL}/api/auth/login`, {
+        { response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ const Login = (props) => {
 
         else
         {
-            response = await fetch(`http://${process.env.REACT_APP_API_URL}/api/auth/createuser`, {
+            response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/createuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ const Login = (props) => {
         const json = await response.json()
         if (json.success) {
             localStorage.setItem('token', json.authtoken);
-            localStorage.setItem('name', json.authtoken);
+            localStorage.setItem('name', json.user);
             history.push("/");
 
         }

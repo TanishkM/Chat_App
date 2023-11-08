@@ -4,7 +4,7 @@ const Message = ({ username, messageList }) => {
     return (
         <div>
 
-            {messageList.map((messageContect) => {
+                {(messageList.map((messageContect) => {
                 return (<div className='message' id={username === messageContect.author ? "you" : "other"}>
                     <div>
                         <div className="message-content">
@@ -20,7 +20,7 @@ const Message = ({ username, messageList }) => {
 
                 </div>
                 )
-            })}
+            }))}
 
         </div>
     )

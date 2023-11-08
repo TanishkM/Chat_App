@@ -29,8 +29,9 @@ const Chat = ({ socket, username, room ,messageList,setMessageList}) => {
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
+      // console.log(messageList);
     });
-  }, [socket,setMessageList]);
+  }, [socket,setMessageList,]);
 
   return (
     <div className="chat-window">
@@ -50,7 +51,7 @@ const Chat = ({ socket, username, room ,messageList,setMessageList}) => {
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-          onKeyPress={(event) => {
+          onKeyDown={(event) => {
             event.key === "Enter" && sendMessage();
           }}
         />
