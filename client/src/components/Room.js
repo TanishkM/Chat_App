@@ -42,7 +42,7 @@ const Room = () => {
         },
       });
       const json = await response.json()
-      // console.log(json);
+      console.log(json);
       setUsername(json.name)
 
       socket.emit("join_room", { username, room });
