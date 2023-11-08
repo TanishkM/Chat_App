@@ -17,7 +17,7 @@ const Login = (props) => {
         e.preventDefault();
         let response;
         if(!spage)
-        { response = await fetch("http://localhost:3001/api/auth/login", {
+        { response = await fetch(`http://${process.env.REACT_APP_API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ const Login = (props) => {
 
         else
         {
-            response = await fetch("http://localhost:3001/api/auth/createuser", {
+            response = await fetch(`http://${process.env.REACT_APP_API_URL}/api/auth/createuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

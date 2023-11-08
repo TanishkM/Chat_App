@@ -4,7 +4,7 @@ import Chat from './Chat';
 import {useHistory} from 'react-router-dom'
 
 
-const socket = io.connect('http://localhost:3001');
+const socket = io.connect(`http://${process.env.REACT_APP_API_URL}`);
 const Room = () => {
   let history=useHistory();
   const [messageList, setMessageList] = useState([]);
@@ -18,7 +18,7 @@ const Room = () => {
   },[history])
   const getChats = async () => {
     // API Call 
-    const response = await fetch(`http://localhost:3001/api/chats/fetchallchats`, {
+    const response = await fetch(`http://${process.env.REACT_APP_API_URL}/api/chats/fetchallchats`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const Room = () => {
 
   const joinRoom = async () => {
     if (room !== "") {
-      const response = await fetch(`http://localhost:3001/api/auth/getuser`, {
+      const response = await fetch(`http://${process.env.REACT_APP_API_URL}/api/auth/getuser`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
